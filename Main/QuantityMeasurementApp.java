@@ -1,3 +1,9 @@
+import java.util.Objects;
+
+/**
+ * Quantity Measurement App (UC1–UC8 for Length).
+ * UC8 refactor: LengthUnit is standalone and owns conversion logic.
+ */
 public class QuantityMeasurementApp {
 
     public static <U extends IMeasurable> void demonstrateEquality(Quantity<U> q1, Quantity<U> q2) {
@@ -17,20 +23,15 @@ public class QuantityMeasurementApp {
     }
 
     public static void main(String[] args) {
-
         Quantity<LengthUnit> length1 = new Quantity<>(1.0, LengthUnit.FEET);
-        Quantity<LengthUnit> length2 = new Quantity<>(12.0, LengthUnit.INCH);
+        Quantity<LengthUnit> length2 = new Quantity<>(12.0, LengthUnit.INCHES);
 
         Quantity<WeightUnit> weight1 = new Quantity<>(1.0, WeightUnit.KILOGRAM);
         Quantity<WeightUnit> weight2 = new Quantity<>(1000.0, WeightUnit.GRAM);
 
-        Quantity<VolumeUnit> volume1 = new Quantity<>(1.0, VolumeUnit.LITRE);
-        Quantity<VolumeUnit> volume2 = new Quantity<>(1000.0, VolumeUnit.MILLILITRE);
-        Quantity<VolumeUnit> volume3 = new Quantity<>(1.0, VolumeUnit.GALLON);
-
         System.out.println("Length Operations:");
         demonstrateEquality(length1, length2);
-        demonstrateConversion(length1, LengthUnit.INCH);
+        demonstrateConversion(length1, LengthUnit.INCHES);
         demonstrateAddition(length1, length2, LengthUnit.FEET);
 
         System.out.println();
@@ -39,15 +40,5 @@ public class QuantityMeasurementApp {
         demonstrateEquality(weight1, weight2);
         demonstrateConversion(weight1, WeightUnit.GRAM);
         demonstrateAddition(weight1, weight2, WeightUnit.KILOGRAM);
-
-        System.out.println();
-
-        System.out.println("Volume Operations:");
-        demonstrateEquality(volume1, volume2);
-        demonstrateEquality(volume3, new Quantity<>(3.78541, VolumeUnit.LITRE));
-        demonstrateConversion(volume1, VolumeUnit.MILLILITRE);
-        demonstrateConversion(volume3, VolumeUnit.LITRE);
-        demonstrateAddition(volume1, volume2, VolumeUnit.LITRE);
-        demonstrateAddition(volume1, volume3, VolumeUnit.GALLON);
     }
 }
